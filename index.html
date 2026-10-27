@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connecting...</title>
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - FIXED ASSET PATH -->
     <script async src="https://googletagmanager.com"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -15,11 +15,11 @@
       // =============================================================
       // CONFIGURATION: UPDATE THESE FIELDS FOR NEW CAMPAIGNS
       // =============================================================
-      const CAMPAIGN_NAME = "fall_drive_2026";
+      const CAMPAIGN_NAME = "Test Campaign";    // Campaign Name
       
-      const URL_DEFAULT = "https://yourwebsite.com";
-      const URL_IPHONE  = "https://apple.com"; 
-      const URL_ANDROID = "https://google.com";
+      const URL_DEFAULT = "https://yourwebsite.com";  // Website Url
+      const URL_IPHONE  = "https://apple.com";        // Iphone Url if apple store or website url
+      const URL_ANDROID = "https://google.com";       // Android Url if play store or website url
       // =============================================================
 
       // 1. Device Detection Logic
@@ -49,31 +49,84 @@
         'device_type': detectedDevice
       });
 
-      // 3. Execute Smooth Routing
+      // 3. Execute Smooth Routing (Delayed to 1.5s to display the logo animation smoothly)
       setTimeout(function() {
           window.location.href = finalDestination;
-      }, 350);
+      }, 1500);
     </script>
 
     <style>
+        /* White clean background to perfectly fit the logo shape matrix */
         body {
-            background-color: #0b0f19;
-            color: #64748b;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #ffffff; 
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden;
         }
-        .spinner {
+
+        .splash-container {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+        }
+
+        /* -------------------------------------------------------------
+           LOGO ANIMATION STYLES (Elegant slow spin & pulse glow)
+           ------------------------------------------------------------- */
+        .animated-logo {
+            width: 140px;         
+            height: 140px;
+            object-fit: contain;
+            animation: elegantSpinGlow 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes elegantSpinGlow {
+            0% {
+                transform: scale(0.9) rotate(0deg);
+                filter: drop-shadow(0 0 0px rgba(0, 0, 0, 0));
+            }
+            50% {
+                transform: scale(1.05) rotate(180deg);
+                /* Emits a blended orange/red glow pulled directly from the logo artwork shades */
+                filter: drop-shadow(0 4px 25px rgba(234, 88, 12, 0.45)); 
+            }
+            100% {
+                transform: scale(0.9) rotate(360deg);
+                filter: drop-shadow(0 0 0px rgba(0, 0, 0, 0));
+            }
+        }
+
+        .loading-text {
+            color: #475569;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.75px;
+            text-transform: uppercase;
+            animation: fadeText 1.5s ease-in-out infinite;
+        }
+
+        @keyframes fadeText {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="spinner">
-        <p style="font-size: 14px; letter-spacing: 0.5px;">Routing to secure destination...</p>
+
+    <div class="splash-container">
+        <!-- Pulls the logo image located in your repository root folder -->
+        <img class="animated-logo" 
+             src="logo.png" 
+             alt="University Logo">
+             
+        <div class="loading-text">Connecting Securely...</div>
     </div>
+
 </body>
 </html>
