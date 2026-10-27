@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connecting...</title>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://googletagmanager.com"></script>
+    <!-- Google tag (gtag.js) Framework -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GX6ECYKV0D"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -15,14 +15,14 @@
       // =============================================================
       // CONFIGURATION: UPDATE THESE FIELDS FOR NEW CAMPAIGNS
       // =============================================================
-      const CAMPAIGN_NAME = "Test Campaign";    // Campaign Name
+      const CAMPAIGN_NAME = "Test Campaign";    // Change this for a new campaign name
       
-      const URL_DEFAULT = "https://yourwebsite.com";  // Website Url
-      const URL_IPHONE  = "https://apple.com";        // Iphone Url if apple store or website url
-      const URL_ANDROID = "https://google.com";       // Android Url if play store or website url
+      const URL_DEFAULT = "https://yourwebsite.com";  // Fallback web URL
+      const URL_IPHONE  = "https://apple.com";        // iPhone routing target
+      const URL_ANDROID = "https://google.com";       // Android routing target
       // =============================================================
 
-      // 1. Device Detection Logic
+      // 1. Safe Native Device Detection Logic
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       let finalDestination = URL_DEFAULT;
       let detectedDevice = "Desktop/Other";
@@ -35,7 +35,7 @@
           finalDestination = URL_IPHONE || URL_DEFAULT;
       }
 
-      // 2. Log Data to Google Analytics (GA4)
+      // 2. Transmit Scan Event to Google Analytics Stream
       gtag('config', 'G-GX6ECYKV0D', {
         'page_title': 'Smart QR Redirect',
         'campaign_source': 'printed_qr',
@@ -43,19 +43,20 @@
         'campaign_name': CAMPAIGN_NAME
       });
 
-      // Custom event logging the scanner's device ecosystem
+      // Custom metric payload tracking mobile ecosystems natively
       gtag('event', 'qr_scan', {
         'campaign_run': CAMPAIGN_NAME,
         'device_type': detectedDevice
       });
 
-      // 3. Execute Smooth Routing (Delayed to 1.5s to display the light animation)
+      // 3. Execute Smooth Routing Interface
       setTimeout(function() {
           window.location.href = finalDestination;
       }, 1500);
     </script>
 
     <style>
+        /* White canvas frame to perfectly isolate the circular logo design */
         body {
             background-color: #ffffff; 
             margin: 0;
@@ -76,7 +77,7 @@
         }
 
         /* -------------------------------------------------------------
-           ROTATING BORDER LIGHTS STYLES (Logo stays static)
+           OUTER BOUNDARY LIGHT ROTATION STYLES (Logo stays static)
            ------------------------------------------------------------- */
         .light-ring-wrapper {
             position: relative;
@@ -87,7 +88,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            /* Matches the red, orange, and blue palette tones of your logo */
+            /* Conic light array synced to the red, orange, and blue university palette */
             background: conic-gradient(#ea580c, #3b82f6, #dc2626, #ea580c);
             animation: spinLights 2s linear infinite;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -99,7 +100,7 @@
             }
         }
 
-        /* Inner mask prevents the logo from spinning back with the border background */
+        /* Inner counter mask layer to lock the center icon completely straight */
         .static-logo-container {
             position: absolute;
             width: 138px;
@@ -109,7 +110,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Cancels out the parent spin so the logo remains completely upright */
+            /* Inverts rotation values to cancel out spinning background movement */
             animation: counterSpin 2s linear infinite;
         }
 
@@ -143,9 +144,9 @@
 <body>
 
     <div class="splash-container">
-        <!-- Spinning light container wrapper -->
+        <!-- Perimeter boundary spinner wrapper -->
         <div class="light-ring-wrapper">
-            <!-- Non-spinning counter mask containing the logo -->
+            <!-- Center isolate layer shielding emblem from matrix spin -->
             <div class="static-logo-container">
                 <img class="logo-img" 
                      src="logo.png" 
