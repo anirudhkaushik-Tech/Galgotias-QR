@@ -1,11 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- REPLACE THE URL BELOW WITH YOUR VARIABLE LINK -->
-    <meta http-equiv="refresh" content="0; url=https://www.linkedin.com/in/ankit-alok-560923112/">
-    <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecting...</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://googletagmanager.com"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // =============================================================
+      // CONFIGURATION: UPDATE THESE FIELDS FOR NEW CAMPAIGNS
+      // =============================================================
+      const CAMPAIGN_NAME = "fall_drive_2026";
+      
+      const URL_DEFAULT = "https://yourwebsite.com";
+      const URL_IPHONE  = "https://apple.com"; 
+      const URL_ANDROID = "https://google.com";
+      // =============================================================
+
+      // 1. Device Detection Logic
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      let finalDestination = URL_DEFAULT;
+      let detectedDevice = "Desktop/Other";
+
+      if (/android/i.test(userAgent)) {
+          detectedDevice = "Android";
+          finalDestination = URL_ANDROID || URL_DEFAULT;
+      } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          detectedDevice = "iOS";
+          finalDestination = URL_IPHONE || URL_DEFAULT;
+      }
+
+      // 2. Log Data to Google Analytics (GA4)
+      gtag('config', 'G-GX6ECYKV0D', {
+        'page_title': 'Smart QR Redirect',
+        'campaign_source': 'printed_qr',
+        'campaign_medium': 'print',
+        'campaign_name': CAMPAIGN_NAME
+      });
+
+      // Custom event logging the scanner's device ecosystem
+      gtag('event', 'qr_scan', {
+        'campaign_run': CAMPAIGN_NAME,
+        'device_type': detectedDevice
+      });
+
+      // 3. Execute Smooth Routing
+      setTimeout(function() {
+          window.location.href = finalDestination;
+      }, 350);
+    </script>
+
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #64748b;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .spinner {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <p>If you are not redirected, <a href="https://www.linkedin.com/in/ankit-alok-560923112/">click here</a>.</p>
+    <div class="spinner">
+        <p style="font-size: 14px; letter-spacing: 0.5px;">Routing to secure destination...</p>
+    </div>
 </body>
 </html>
