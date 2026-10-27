@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connecting...</title>
 
-    <!-- Google tag (gtag.js) - FIXED ASSET PATH -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://googletagmanager.com"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -49,14 +49,13 @@
         'device_type': detectedDevice
       });
 
-      // 3. Execute Smooth Routing (Delayed to 1.5s to display the logo animation smoothly)
+      // 3. Execute Smooth Routing (Delayed to 1.5s to display the light animation)
       setTimeout(function() {
           window.location.href = finalDestination;
       }, 1500);
     </script>
 
     <style>
-        /* White clean background to perfectly fit the logo shape matrix */
         body {
             background-color: #ffffff; 
             margin: 0;
@@ -77,29 +76,53 @@
         }
 
         /* -------------------------------------------------------------
-           LOGO ANIMATION STYLES (Elegant slow spin & pulse glow)
+           ROTATING BORDER LIGHTS STYLES (Logo stays static)
            ------------------------------------------------------------- */
-        .animated-logo {
-            width: 140px;         
-            height: 140px;
-            object-fit: contain;
-            animation: elegantSpinGlow 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        .light-ring-wrapper {
+            position: relative;
+            width: 146px;
+            height: 146px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            /* Matches the red, orange, and blue palette tones of your logo */
+            background: conic-gradient(#ea580c, #3b82f6, #dc2626, #ea580c);
+            animation: spinLights 2s linear infinite;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
-        @keyframes elegantSpinGlow {
-            0% {
-                transform: scale(0.9) rotate(0deg);
-                filter: drop-shadow(0 0 0px rgba(0, 0, 0, 0));
-            }
-            50% {
-                transform: scale(1.05) rotate(180deg);
-                /* Emits a blended orange/red glow pulled directly from the logo artwork shades */
-                filter: drop-shadow(0 4px 25px rgba(234, 88, 12, 0.45)); 
-            }
+        @keyframes spinLights {
             100% {
-                transform: scale(0.9) rotate(360deg);
-                filter: drop-shadow(0 0 0px rgba(0, 0, 0, 0));
+                transform: rotate(360deg);
             }
+        }
+
+        /* Inner mask prevents the logo from spinning back with the border background */
+        .static-logo-container {
+            position: absolute;
+            width: 138px;
+            height: 138px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Cancels out the parent spin so the logo remains completely upright */
+            animation: counterSpin 2s linear infinite;
+        }
+
+        @keyframes counterSpin {
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        .logo-img {
+            width: 130px;         
+            height: 130px;
+            object-fit: contain;
         }
 
         .loading-text {
@@ -120,10 +143,15 @@
 <body>
 
     <div class="splash-container">
-        <!-- Pulls the logo image located in your repository root folder -->
-        <img class="animated-logo" 
-             src="logo.png" 
-             alt="University Logo">
+        <!-- Spinning light container wrapper -->
+        <div class="light-ring-wrapper">
+            <!-- Non-spinning counter mask containing the logo -->
+            <div class="static-logo-container">
+                <img class="logo-img" 
+                     src="logo.png" 
+                     alt="University Logo">
+            </div>
+        </div>
              
         <div class="loading-text">Connecting Securely...</div>
     </div>
